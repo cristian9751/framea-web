@@ -22,6 +22,8 @@
   "menuColor": "default",
   "menuAccent": "bold",
   "registries": {
-    "@creative-tim": "https://www.creative-tim.com/ui/r/{name}.json"
+    "@creative-tim": "https://www.creative-tim.com/ui/r/{name}.json",
+    "@react-bits": "https://reactbits.dev/r/{name}.json",
+    "@animate-ui": "https://animate-ui.com/r/{name}.json"
   }
 }
