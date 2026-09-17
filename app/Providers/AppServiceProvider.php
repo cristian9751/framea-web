@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\abstract\interfaces\IGenericRepository;
 use App\abstract\interfaces\services\IProductService;
 use App\abstract\interfaces\services\IUserService;
 use App\Models\Product;
@@ -20,23 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-
-
-        $this->app->singleton(UserService::class, function ($app) {
-            return new UserService(
-                repository: new GenericRepository(User::class)
-            );
-        });
+        $this->app->when(UserService::class)->needs(IGenericRepository::class)
+            ->give(fn() => new GenericRepository(User::class));
 
         $this->app->bind(IUserService::class, UserService::class);
 
-        $this->app->singleton(ProductService::class, function ($app) {
-            return new ProductService(
-                repository: new GenericRepository(Product::class)
-            );
-        });
-
-
+        $this->app->when(ProductService::class)->needs(IGenericRepository::class)
+            ->give(fn () => new GenericRepository(Product::class));
         $this->app->bind(IProductService::class, ProductService::class);
 
     }
