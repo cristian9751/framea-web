@@ -7,15 +7,15 @@ import { fileURLToPath, URL } from 'node:url';
 export default defineConfig({
     output: {
         codeSplitting: {
-            minSize: 20000
+            minSize: 20000,
             groups: [
                 {
                     name: 'vendor',
-                    test: /node_modules
-                }
-            ]
-        }
-    }
+                    test: /node_modules/,
+                },
+            ],
+        },
+    },
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./resources/js', import.meta.url)),
