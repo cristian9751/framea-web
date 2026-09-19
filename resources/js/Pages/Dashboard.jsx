@@ -18,12 +18,9 @@ export default function Dashboard({ discordData, steamData }) {
     const [steamSynced, setSteamSynced] = useState(steamData["linked"]);
     const [discordSynced, setDiscordSynced] = useState(discordData["linked"]);
 
-    console.log(perms[Permissions.VIEW_ADMINISTRATION_PANEL])
-
-
     return (
         <Layout
-            title="FRAMEA | Dashboard"
+            title="ENTERPRISE | Dashboard"
             description="Sincroniza tu cuenta de Steam y gestiona tus roles de Discord"
         >
             <PageHero
@@ -41,17 +38,20 @@ export default function Dashboard({ discordData, steamData }) {
                                 MI CUENTA
                             ========================== */}
 
-                            <Card>
+                            <Card className="clay rounded-4xl">
                                 <CardHeader>
-                                    <CardTitle>Mi Cuenta</CardTitle>
+                                    <CardTitle className="font-display text-xl font-bold text-foreground">
+                                        Mi Cuenta
+                                    </CardTitle>
                                     <CardDescription>
                                         Consulta tus pedidos, facturas y cuentas vinculadas
                                     </CardDescription>
 
                                     {perms[Permissions.VIEW_ADMINISTRATION_PANEL] && (
                                         <CardAction>
-                                            <Button className={"rounded-none"}
-                                                    onClick={() => router.get('/admin/dashboard')}
+                                            <Button
+                                                className="rounded-full bg-gradient-to-r from-clay-coral to-clay-violet text-white shadow-clay hover:opacity-90"
+                                                onClick={() => router.get('/admin/dashboard')}
                                             >
                                                 Panel de administracion
                                             </Button>

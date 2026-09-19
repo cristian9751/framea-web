@@ -20,9 +20,12 @@ const modes = [
 
 function BlockTitle({ children }) {
     return (
-        <div className="mb-5 border-b-2 border-border pb-3">
-            <h2 className="font-display text-2xl font-bold tracking-widest text-primary uppercase">
-                {children}
+        <div className="mb-5 flex items-center gap-3 pb-2">
+            <span className="h-6 w-1.5 rounded-full bg-gradient-to-b from-clay-coral to-clay-violet" />
+            <h2 className="font-display text-2xl font-bold tracking-wide uppercase">
+                <span className="text-white">
+                    {children}
+                </span>
             </h2>
         </div>
     );
@@ -31,19 +34,19 @@ function BlockTitle({ children }) {
 export default function About() {
     return (
         <Layout
-            title="FRAMEA | Sobre el Server"
-            description="Información sobre FRAMEA - Servidor de SCP: Secret Laboratory en español"
+            title="ENTERPRISE | Sobre el Server"
+            description="Información sobre ENTERPRISE - Servidor de SCP: Secret Laboratory en español"
         >
-            <PageHero title="Sobre el Servidor" subtitle="Conoce más sobre FRAMEA" />
+            <PageHero title="Sobre el Servidor" subtitle="Conoce más sobre ENTERPRISE" />
 
             <section className="py-24">
                 <div className="container">
                     <div className="mx-auto max-w-[900px] space-y-16">
                         <div>
-                            <BlockTitle>¿Qué es FRAMEA?</BlockTitle>
+                            <BlockTitle>¿Qué es ENTERPRISE?</BlockTitle>
                             <p className="mb-4 text-lg leading-relaxed text-muted-foreground">
-                                FRAMEA es un servidor comunitario de{' '}
-                                <strong className="text-foreground">SCP: Secret Laboratory</strong>{' '}
+                                ENTERPRISE es un servidor comunitario de{' '}
+                                <strong className="font-semibold text-transparent [background-image:linear-gradient(120deg,#ff7d6b,#f472b6)] bg-clip-text">SCP: Secret Laboratory</strong>{' '}
                                 enfocado en la comunidad hispanohablante. Nacimos con la misión de
                                 ofrecer una experiencia de juego justa, divertida y optimizada para
                                 todos los jugadores de habla hispana.
@@ -59,7 +62,7 @@ export default function About() {
                         <div>
                             <BlockTitle>Nuestra Historia</BlockTitle>
                             <p className="mb-4 text-lg leading-relaxed text-muted-foreground">
-                                Fundado en 2023, FRAMEA comenzó como un pequeño proyecto entre
+                                Fundado en 2023, ENTERPRISE comenzó como un pequeño proyecto entre
                                 amigos apasionados por SCP:SL. Rápidamente crecimos gracias al apoyo
                                 de la comunidad, convirtiéndonos en uno de los servidores en español
                                 más populares del juego.
@@ -77,7 +80,7 @@ export default function About() {
                                 {specs.map((s) => (
                                     <Card
                                         key={s.label}
-                                        className="flex-row items-center justify-between border-border px-5 py-4 transition-all hover:border-primary"
+                                        className="clay flex-row items-center justify-between rounded-2xl px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-clay-lg"
                                     >
                                         <CardContent className="flex w-full items-center justify-between py-0">
                                             <span className="font-display text-sm tracking-wider text-muted-foreground uppercase">
@@ -98,11 +101,13 @@ export default function About() {
                                 {modes.map((m) => (
                                     <Card
                                         key={m.title}
-                                        className="border-border transition-all hover:-translate-y-0.5 hover:border-primary"
+                                        className="clay rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-clay-lg"
                                     >
                                         <CardHeader>
-                                            <CardTitle className="font-display text-base font-bold tracking-wider text-primary uppercase">
-                                                {m.title}
+                                            <CardTitle className="font-display text-base font-bold tracking-wide uppercase">
+                                                <span className="text-white">
+                                                    {m.title}
+                                                </span>
                                             </CardTitle>
                                         </CardHeader>
                                         <CardContent>

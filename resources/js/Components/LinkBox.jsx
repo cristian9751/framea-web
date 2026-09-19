@@ -18,7 +18,7 @@ export function LinkBox({ synced, data, authenticator, onSyncChanged }) {
     const initials = username.slice(0, 2).toUpperCase();
 
     return (
-        <Card>
+        <Card className="clay rounded-4xl">
             <CardHeader>
                 <CardTitle>Cuenta de {authenticator}</CardTitle>
                 <CardDescription>
@@ -43,13 +43,13 @@ export function LinkBox({ synced, data, authenticator, onSyncChanged }) {
             </CardContent>
             <CardFooter>
                 {synced ? (
-                    <Button onClick={unlink} variant="secondary" className="w-full">
+                    <Button onClick={unlink} variant="secondary" className="w-full rounded-full">
                         Desvincular
                     </Button>
                 ) : (
                     <Button
                         render={<a href={`/auth/signin/${authenticator}`} />}
-                        className="w-full"
+                        className="w-full rounded-full bg-gradient-to-r from-clay-coral to-clay-violet text-white shadow-clay hover:opacity-90"
                     >
                         <HugeiconsIcon icon={Link04Icon} strokeWidth={2} />
                         Vincular

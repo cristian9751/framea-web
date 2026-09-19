@@ -10,11 +10,11 @@ export default function Layout({ title, description, children }) {
                 <title>{title}</title>
                 <meta
                     name="description"
-                    content={description || 'FRAMEA - Servidor de SCP: Secret Laboratory en espanol'}
+                    content={description || 'ENTERPRISE - Servidor de SCP: Secret Laboratory en espanol'}
                 />
                 <meta
                     name="keywords"
-                    content="SCP, Secret Laboratory, FRAMEA, servidor, gaming, horror, multiplayer"
+                    content="SCP, Secret Laboratory, ENTERPRISE, servidor, gaming, horror, multiplayer"
                 />
             </Head>
             <Particles />

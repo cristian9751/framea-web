@@ -38,8 +38,8 @@ const categories = [
 export default function Rules() {
     return (
         <Layout
-            title="FRAMEA | Reglas"
-            description="Reglas del servidor FRAMEA de SCP: Secret Laboratory"
+            title="ENTERPRISE | Reglas"
+            description="Reglas del servidor ENTERPRISE de SCP: Secret Laboratory"
         >
             <PageHero title="Reglas del Servidor" subtitle="Normas para mantener una comunidad sana y divertida" />
 
@@ -48,8 +48,11 @@ export default function Rules() {
                     <div className="mx-auto max-w-[800px]">
                         {categories.map((cat) => (
                             <div key={cat.title} className="mb-12">
-                                <h2 className="mb-6 border-b-2 border-border pb-2.5 font-display text-xl font-bold tracking-widest text-accent uppercase">
-                                    {cat.title}
+                                <h2 className="mb-6 flex items-center gap-3 pb-2 font-display text-xl font-bold tracking-wide uppercase">
+                                    <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-clay-coral to-clay-gold" />
+                                    <span className="text-transparent [background-image:linear-gradient(120deg,#ff7d6b,#fbbf24)] bg-clip-text">
+                                        {cat.title}
+                                    </span>
                                 </h2>
                                 <div
                                     className={`flex flex-col gap-3 ${
@@ -59,12 +62,15 @@ export default function Rules() {
                                     {cat.items.map((item) => (
                                         <Card
                                             key={item.num}
-                                            className={`border-border transition-all hover:border-primary ${
+                                            className={`clay rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-clay-lg ${
                                                 cat.compact ? 'px-5 py-4' : 'px-5 py-5'
                                             }`}
                                         >
                                             <div className="flex gap-4">
-                                                <span className="pt-0.5 font-display text-sm font-bold text-primary">
+                                                <span
+                                                    className="flex size-8 shrink-0 items-center justify-center rounded-xl pt-0 font-display text-[0.7rem] font-bold text-clay-coral shadow-clay-inset"
+                                                    style={{ background: 'rgb(255 125 107 / 0.12)' }}
+                                                >
                                                     {item.num}
                                                 </span>
                                                 <div>
