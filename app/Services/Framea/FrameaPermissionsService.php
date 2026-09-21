@@ -4,9 +4,9 @@ namespace App\Services\Framea;
 
 use App\abstract\interfaces\services\IFrameaPermissionsService;
 
-class FrameaPermissionseSrvice implements IFrameaPermissionsService
+class FrameaPermissionsService implements IFrameaPermissionsService
 {
-    public function __construct(private readonly FrameaWsService $ws)
+    public function __construct(private  FrameaWsService $ws)
     {
     }
 

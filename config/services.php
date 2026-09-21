@@ -49,4 +49,10 @@ return [
         ],
         "force_https" => true
     ],
+    'framea' => [
+        'ws_host' => env('FRAMEA_WS_HOST', 'localhost'),
+        'ws_port' => (int) env('FRAMEA_WS_PORT', 993),
+        'ws_path' => env('FRAMEA_WS_PATH', '/ws'),
+        'ws_request_timeout' => (float) env('FRAMEA_WS_REQUEST_TIMEOUT', 5.0),
+    ]
 ];

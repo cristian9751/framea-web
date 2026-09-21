@@ -12,6 +12,7 @@
         "php": "^8.3",
         "amphp/amp": "^3.1",
         "amphp/websocket-client": "^2.0",
+        "amphp/websocket-server": "^4",
         "inertiajs/inertia-laravel": "^3.3",
         "laravel/framework": "^13.17",
         "laravel/socialite": "^5.30",

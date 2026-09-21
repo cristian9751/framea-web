@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\User;
 use App\repository\GenericRepository;
 use App\Services\Framea\FrameaPermissionseSrvice;
+use App\Services\Framea\FrameaPermissionsService;
 use App\Services\Framea\FrameaWsService;
 use App\Services\ProductService;
 use App\Services\UserService;
@@ -34,9 +35,16 @@ class AppServiceProvider extends ServiceProvider
             ->give(fn () => new GenericRepository(Product::class));
         $this->app->bind(IProductService::class, ProductService::class);
 
-        $this->app->singleton(IFrameaWsService::class, FrameaWsService::class);
+        $this->app->singleton(FrameaWsService::class, fn () => new FrameaWsService(
+            host: (string) config('services.framea.ws_host', '0.0.0.0'),
+            port: (int) config('services.framea.ws_port', 1370),
+            path: (string) config('services.framea.ws_path', '/ws'),
+            requestTimeout: (float) config('services.framea.ws_request_timeout', 5.0),
+        ));
 
-        $this->app->singleton(IFrameaPermissionsService::class, fn () => new FrameaPermissionseSrvice($this->app->make(IFrameaWsService::class)));
+        $this->app->singleton(IFrameaWsService::class, fn () => $this->app->make(FrameaWsService::class));
+
+        $this->app->singleton(IFrameaPermissionsService::class, FrameaPermissionsService::class);
 
 
     }

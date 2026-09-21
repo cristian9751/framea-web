@@ -9,6 +9,7 @@ use Inertia\Response;
 
 class FrameaPermissionsController extends Controller
 {
+    private const PAGE = 'AdminDashboardPerms';
 
     public function __construct(
         private readonly IFrameaPermissionsService $permissions
@@ -16,14 +17,25 @@ class FrameaPermissionsController extends Controller
     }
 
     /**
+     * Base page: groups and tracks used by every view of the panel.
+     * Data goes through page props only (never through shared middleware).
+     *
+     * @param array<string, mixed> $extra
+     */
+    private function page(array $extra = []): Response
+    {
+        return Inertia::render(self::PAGE, array_merge([
+            'groups' => $this->permissions->groupList(),
+            'tracks' => $this->permissions->trackList(),
+        ], $extra));
+    }
+
+    /**
      * Base page: groups and tracks used to build the lucky-perms style UI.
      */
     public function index(): Response
     {
-        return Inertia::render('page', [
-            'groups' => $this->permissions->groupList(),
-            'tracks' => $this->permissions->trackList(),
-        ]);
+        return $this->page();
     }
 
     /**
@@ -35,7 +47,7 @@ class FrameaPermissionsController extends Controller
             'serverKey' => ['nullable', 'string'],
         ]);
 
-        return Inertia::render('page', [
+        return $this->page([
             'steamId' => $steamId,
             'user' => $this->permissions->userInfo($steamId),
             'userGroups' => $this->permissions->userGroups($steamId),
@@ -94,7 +106,7 @@ class FrameaPermissionsController extends Controller
             'serverKey' => ['nullable', 'string'],
         ]);
 
-        return Inertia::render('page', [
+        return $this->page([
             'check' => $this->permissions->check(
                 $validated['steamId'],
                 $validated['node'],
@@ -105,7 +117,7 @@ class FrameaPermissionsController extends Controller
 
     public function groupList(Request $request): Response
     {
-        return Inertia::render('page', [
+        return $this->page([
             'groups' => $this->permissions->groupList(),
         ]);
     }
@@ -133,20 +145,16 @@ class FrameaPermissionsController extends Controller
         return back();
     }
 
-    public function groupDelete(Request $request)
+    public function groupDelete(Request $request, string $groupName)
     {
-        $validated = $request->validate([
-            'groupName' => ['required', 'string'],
-        ]);
+        $this->permissions->groupDelete($groupName);
 
-        $this->permissions->groupDelete($validated['groupName']);
-
-        return back();
+        return redirect()->route('admin.perms.index');
     }
 
     public function groupInfo(Request $request, string $groupName): Response
     {
-        return Inertia::render('page', [
+        return $this->page([
             'groupName' => $groupName,
             'group' => $this->permissions->groupInfo($groupName),
         ]);
@@ -154,38 +162,36 @@ class FrameaPermissionsController extends Controller
 
     public function trackList(Request $request): Response
     {
-        return Inertia::render('page', [
+        return $this->page([
             'tracks' => $this->permissions->trackList(),
         ]);
     }
 
-    public function trackPromote(Request $request)
+    public function trackPromote(Request $request, string $track)
     {
         $validated = $request->validate([
             'steamId' => ['required', 'string'],
-            'track' => ['required', 'string'],
         ]);
 
-        $this->permissions->trackPromote($validated['steamId'], $validated['track']);
+        $this->permissions->trackPromote($validated['steamId'], $track);
 
         return back();
     }
 
-    public function trackDemote(Request $request)
+    public function trackDemote(Request $request, string $track)
     {
         $validated = $request->validate([
             'steamId' => ['required', 'string'],
-            'track' => ['required', 'string'],
         ]);
 
-        $this->permissions->trackDemote($validated['steamId'], $validated['track']);
+        $this->permissions->trackDemote($validated['steamId'], $track);
 
         return back();
     }
 
     public function userGroups(Request $request, string $steamId): Response
     {
-        return Inertia::render('page', [
+        return $this->page([
             'steamId' => $steamId,
             'userGroups' => $this->permissions->userGroups($steamId),
         ]);
@@ -193,7 +199,7 @@ class FrameaPermissionsController extends Controller
 
     public function userInfo(Request $request, string $steamId): Response
     {
-        return Inertia::render('page', [
+        return $this->page([
             'steamId' => $steamId,
             'user' => $this->permissions->userInfo($steamId),
         ]);
