@@ -66,7 +66,7 @@ final class FrameaWsService implements IFrameaWsService
      * established (and again after each reconnect) so callers can issue
      * request() calls from outside the receive loop.
      */
-    public function run(?Cancellation $shutdown = null, ?callable $onConnected = null): void
+    public function run(Cancellation $shutdown = null, ?callable $onConnected = null): void
     {
         $attempt = 0;
 

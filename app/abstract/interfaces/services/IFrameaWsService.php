@@ -2,6 +2,8 @@
 
 namespace App\abstract\interfaces\services;
 
+use Amp\Cancellation;
+
 interface IFrameaWsService
 {
     /**

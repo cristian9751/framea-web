@@ -12,7 +12,7 @@ import {Button} from "@/Components/ui/button.jsx";
 
 export default function Dashboard({ discordData, steamData }) {
     const {perms } = usePage().props
-
+    console.log(perms[Permissions.VIEW_ADMINISTRATION_PANEL])
     const [steamSynced, setSteamSynced] = useState(steamData["linked"]);
     const [discordSynced, setDiscordSynced] = useState(discordData["linked"]);
 
