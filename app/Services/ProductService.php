@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\abstract\interfaces\IGenericRepository;
 use App\abstract\interfaces\services\IProductService;
 use App\dto\AbstractDTO;
 use App\dto\CreateProductDTO;
@@ -15,9 +16,9 @@ class ProductService implements IProductService
 {
 
 
-    private GenericRepository $repository;
+    private IGenericRepository $repository;
     public function __construct(
-         GenericRepository $repository
+        IGenericRepository $repository
     )
     {
         $this->repository = $repository;

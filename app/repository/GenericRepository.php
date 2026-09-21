@@ -2,10 +2,11 @@
 
 namespace App\repository;
 
+use App\abstract\interfaces\IGenericRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\UniqueConstraintViolationException;
 
- class GenericRepository
+ class GenericRepository implements IGenericRepository
 {
 
 

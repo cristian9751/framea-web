@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\abstract\interfaces\IGenericRepository;
 use App\abstract\interfaces\services\IUserService;
 use App\dto\AbstractDTO;
 use App\dto\UserRegistration;
@@ -15,10 +16,10 @@ use App\repository\GenericRepository;
 class UserService  implements IUserService
 {
 
-    private GenericRepository $repository;
+    private IGenericRepository $repository;
 
     public function __construct(
-        GenericRepository $repository,
+        IGenericRepository $repository,
     )
     {
         $this->repository = $repository;
@@ -29,7 +30,6 @@ class UserService  implements IUserService
         $newUserData = $dto->toArray();
 
         $newUserData['role_id'] = User::all()->count() >= 1 ? 1 : 2;
-
         return $this->repository->create($newUserData, [
             $dto->getProvider() . "_id" => $dto->getProviderId(),
         ]);

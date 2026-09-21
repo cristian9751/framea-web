@@ -18,7 +18,8 @@ export default function OrdersPanel({ orders }) {
 
     if (data.length === 0) {
         return (
-            <div className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+            <div className="clay flex flex-col items-center justify-center gap-2 rounded-3xl py-12 text-center">
+                <span className="flex size-14 items-center justify-center rounded-2xl bg-clay-coral/10 text-2xl shadow-clay-inset">📦</span>
                 <p className="font-display text-lg font-bold text-foreground">Sin pedidos</p>
                 <p className="text-sm text-muted-foreground">Aún no tienes pedidos registrados.</p>
             </div>
