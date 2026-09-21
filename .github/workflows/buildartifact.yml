@@ -3,7 +3,7 @@ name: Build production artifact
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: [laravel]
+    workflows: [Laravel]
     types:
       - completed
   push:
