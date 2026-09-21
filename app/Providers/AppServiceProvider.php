@@ -3,11 +3,15 @@
 namespace App\Providers;
 
 use App\abstract\interfaces\IGenericRepository;
+use App\abstract\interfaces\services\IFrameaPermissionsService;
+use App\abstract\interfaces\services\IFrameaWsService;
 use App\abstract\interfaces\services\IProductService;
 use App\abstract\interfaces\services\IUserService;
 use App\Models\Product;
 use App\Models\User;
 use App\repository\GenericRepository;
+use App\Services\Framea\FrameaPermissionseSrvice;
+use App\Services\Framea\FrameaWsService;
 use App\Services\ProductService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Event;
@@ -29,6 +33,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->when(ProductService::class)->needs(IGenericRepository::class)
             ->give(fn () => new GenericRepository(Product::class));
         $this->app->bind(IProductService::class, ProductService::class);
+
+        $this->app->singleton(IFrameaWsService::class, FrameaWsService::class);
+
+        $this->app->singleton(IFrameaPermissionsService::class, fn () => new FrameaPermissionseSrvice($this->app->make(IFrameaWsService::class)));
+
 
     }
 

@@ -25,11 +25,10 @@ class AuthorizationServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->singleton(AuthorizationService::class, function ($app) {
+        $this->app->singleton(IAuthorizationService::class, function ($app) {
             return new AuthorizationService( $app->make(UserService::class));
         });
 
-        $this->app->bind(IAuthorizationService::class, AuthorizationService::class);
         foreach (Actions::cases() as $action) {
             Gate::define($action->value, function ($user, $ownerId = "-1") use ($action) {
                 return app(IAuthorizationService::class)->handleAuthorization($user, $action, $ownerId);

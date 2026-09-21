@@ -23,7 +23,7 @@ class AuthenticationServiceProvider extends ServiceProvider
 
 
 
-        $this->app->singleton(AuthenticationService::class, function ($app) {
+        $this->app->singleton(IAuthenticationService::class, function ($app) {
             return new AuthenticationService(
                 collect(AuthenticatorProvider::cases())
                     ->mapWithKeys(fn (AuthenticatorProvider $provider) => [
@@ -33,8 +33,6 @@ class AuthenticationServiceProvider extends ServiceProvider
                 $app->make(UserService::class)
             );
         });
-
-        $this->app->bind(IAuthenticationService::class, AuthenticationService::class);
     }
 
     /**
