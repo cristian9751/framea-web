@@ -34,7 +34,8 @@ export default function AccountSummary({ user, steamData, discordData }) {
                 {links.map((link) => (
                     <div
                         key={link.label}
-                        className="flex items-center justify-between rounded-3xl border border-border bg-background/50 px-4 py-3"
+                        className="flex items-center justify-between rounded-2xl bg-background/60 px-4 py-3 shadow-clay-inset"
+                        style={{ border: '1px solid rgb(255 255 255 / 0.06)' }}
                     >
                         <span className="text-sm font-medium text-foreground">
                             {link.label}

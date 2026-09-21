@@ -16,7 +16,8 @@ export default function InvoicesPanel({ invoices }) {
 
     if (data.length === 0) {
         return (
-            <div className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+            <div className="clay flex flex-col items-center justify-center gap-2 rounded-3xl py-12 text-center">
+                <span className="flex size-14 items-center justify-center rounded-2xl bg-clay-gold/10 text-2xl shadow-clay-inset">🧾</span>
                 <p className="font-display text-lg font-bold text-foreground">Sin facturas</p>
                 <p className="text-sm text-muted-foreground">No hay facturas emitidas todavía.</p>
             </div>
