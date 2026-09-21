@@ -1,5 +1,4 @@
-import Layout from '../Components/Layout';
-import PageHero from '../Components/PageHero';
+import PageLayout from '../Components/Enterprise/PageLayout';
 import { Card } from '@/Components/ui/card';
 
 const categories = [
@@ -37,11 +36,17 @@ const categories = [
 
 export default function Rules() {
     return (
-        <Layout
+        <PageLayout
             title="ENTERPRISE | Reglas"
             description="Reglas del servidor ENTERPRISE de SCP: Secret Laboratory"
         >
-            <PageHero title="Reglas del Servidor" subtitle="Normas para mantener una comunidad sana y divertida" />
+            <section className="bg-enterprise-bg px-5 pt-10 pb-2">
+                <div className="mx-auto mb-5 max-w-[940px] text-center">
+                    <div className="mx-auto mb-3 h-[2px] w-10 bg-enterprise-primary" />
+                    <h2 className="m-0 text-[clamp(27px,6.75vw,39px)] font-black tracking-[0.08em] text-enterprise-text">REGLAS DEL SERVIDOR</h2>
+                    <p className="mt-1.5 text-[10.5px] tracking-[0.18em] text-enterprise-muted">NORMAS PARA MANTENER UNA COMUNIDAD SANA Y DIVERTIDA</p>
+                </div>
+            </section>
 
             <section className="py-24">
                 <div className="container">
@@ -49,8 +54,8 @@ export default function Rules() {
                         {categories.map((cat) => (
                             <div key={cat.title} className="mb-12">
                                 <h2 className="mb-6 flex items-center gap-3 pb-2 font-display text-xl font-bold tracking-wide uppercase">
-                                    <span className="h-5 w-1.5 rounded-full bg-gradient-to-b from-clay-coral to-clay-gold" />
-                                    <span className="text-transparent [background-image:linear-gradient(120deg,#ff7d6b,#fbbf24)] bg-clip-text">
+                                    <span className="h-5 w-1.5 rounded-full bg-enterprise-primary" />
+                                    <span className="text-enterprise-primary">
                                         {cat.title}
                                     </span>
                                 </h2>
@@ -62,22 +67,22 @@ export default function Rules() {
                                     {cat.items.map((item) => (
                                         <Card
                                             key={item.num}
-                                            className={`clay rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-clay-lg ${
+                                            className={`border-enterprise-border bg-enterprise-card shadow-none rounded-2xl hover:border-enterprise-primary/60 ${
                                                 cat.compact ? 'px-5 py-4' : 'px-5 py-5'
                                             }`}
                                         >
                                             <div className="flex gap-4">
                                                 <span
-                                                    className="flex size-8 shrink-0 items-center justify-center rounded-xl pt-0 font-display text-[0.7rem] font-bold text-clay-coral shadow-clay-inset"
-                                                    style={{ background: 'rgb(255 125 107 / 0.12)' }}
+                                                    className="flex size-8 shrink-0 items-center justify-center rounded-xl pt-0 font-display text-[0.7rem] font-bold text-enterprise-primary"
+                                                    style={{ background: 'rgb(150 119 242 / 0.12)' }}
                                                 >
                                                     {item.num}
                                                 </span>
                                                 <div>
-                                                    <strong className="mb-1 block font-display text-sm tracking-wider text-foreground uppercase">
+                                                    <strong className="mb-1 block font-display text-sm tracking-wider text-enterprise-text uppercase">
                                                         {item.strong}
                                                     </strong>
-                                                    <p className="text-sm leading-relaxed text-muted-foreground">
+                                                    <p className="text-sm leading-relaxed text-enterprise-body">
                                                         {item.desc}
                                                     </p>
                                                 </div>
@@ -90,6 +95,6 @@ export default function Rules() {
                     </div>
                 </div>
             </section>
-        </Layout>
+        </PageLayout>
     );
 }

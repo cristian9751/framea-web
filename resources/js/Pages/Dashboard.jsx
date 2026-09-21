@@ -1,8 +1,6 @@
 import { useState } from "react";
 import {router, usePage} from "@inertiajs/react";
-import Layout from "../Components/Layout";
-import PageHero from "../Components/PageHero";
-import { LinkBox } from "../Components/LinkBox.jsx";
+import PageLayout from "../Components/Enterprise/PageLayout";
 import {Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle} from "@/Components/ui/card.jsx";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/ui/tabs.jsx";
 import AccountSummary from "../Components/Account/AccountSummary.jsx";
@@ -19,16 +17,19 @@ export default function Dashboard({ discordData, steamData }) {
     const [discordSynced, setDiscordSynced] = useState(discordData["linked"]);
 
     return (
-        <Layout
+        <PageLayout
             title="ENTERPRISE | Dashboard"
             description="Sincroniza tu cuenta de Steam y gestiona tus roles de Discord"
         >
-            <PageHero
-                title="Dashboard"
-                subtitle="Sincroniza tu cuenta de Steam y gestiona tus servidores"
-            />
+            <section className="bg-enterprise-bg px-5 pt-10 pb-2">
+                <div className="mx-auto mb-5 max-w-[940px] text-center">
+                    <div className="mx-auto mb-3 h-[2px] w-10 bg-enterprise-primary" />
+                    <h2 className="m-0 text-[clamp(27px,6.75vw,39px)] font-black tracking-[0.08em] text-enterprise-text">DASHBOARD</h2>
+                    <p className="mt-1.5 text-[10.5px] tracking-[0.18em] text-enterprise-muted">SINCRONIZA TU CUENTA DE STEAM Y GESTIONA TUS SERVIDORES</p>
+                </div>
+            </section>
 
-            <main className="flex-1 space-y-6 p-6">
+            <div className="flex-1 space-y-6 p-6">
                 <section className="py-12">
                     <div className="container">
                         <div className="mx-auto max-w-[900px] space-y-10">
@@ -36,21 +37,21 @@ export default function Dashboard({ discordData, steamData }) {
 
                             {/* =========================
                                 MI CUENTA
-                            ========================== */}
+                            ========================= */}
 
-                            <Card className="clay rounded-4xl">
+                            <Card className="border-enterprise-border bg-enterprise-card shadow-none rounded-xl">
                                 <CardHeader>
-                                    <CardTitle className="font-display text-xl font-bold text-foreground">
+                                    <CardTitle className="font-display text-xl font-bold text-enterprise-text">
                                         Mi Cuenta
                                     </CardTitle>
-                                    <CardDescription>
+                                    <CardDescription className="text-enterprise-body">
                                         Consulta tus pedidos, facturas y cuentas vinculadas
                                     </CardDescription>
 
                                     {perms[Permissions.VIEW_ADMINISTRATION_PANEL] && (
                                         <CardAction>
                                             <Button
-                                                className="rounded-full bg-gradient-to-r from-clay-coral to-clay-violet text-white shadow-clay hover:opacity-90"
+                                                className="rounded-full bg-enterprise-primary text-[#111] hover:opacity-90"
                                                 onClick={() => router.get('/admin/dashboard')}
                                             >
                                                 Panel de administracion
@@ -92,7 +93,7 @@ export default function Dashboard({ discordData, steamData }) {
                         </div>
                     </div>
                 </section>
-            </main>
-        </Layout>
+            </div>
+        </PageLayout>
     );
 }

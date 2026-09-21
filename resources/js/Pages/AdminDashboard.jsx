@@ -48,7 +48,7 @@ export default function AdminDashboard() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
                 {stats.map((s) => (
-                    <Card key={s.label} className="clay rounded-4xl transition-all duration-300 hover:-translate-y-1 hover:shadow-clay-lg">
+                    <Card key={s.label} className="clay rounded-4xl">
                         <CardContent className="flex items-start justify-between">
                             <div>
                                 <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
