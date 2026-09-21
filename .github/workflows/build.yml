@@ -1,0 +1,59 @@
+name: Build production artifact
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: bcmath, ctype, curl, intl, mbstring, pcntl, pdo, pdo_mysql, xml, zip
+          coverage: none
+
+      - name: Cache Composer
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install PHP dependencies (production)
+        run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Build frontend assets
+        run: |
+          npm ci --ignore-scripts
+          npm run build
+
+      - name: Prepare deployable folder
+        run: |
+          chmod -R u+w .
+          rm -rf .git .github node_modules tests deploy deploy-docker-compose.yaml
+          rm -f .env .env.backup opencode.json
+          mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: enterprise-web
+          path: .
+          if-no-files-found: error
+          compression-level: 9
